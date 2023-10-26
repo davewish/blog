@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif;
+
+}
+main{
+    padding: 10px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+
+body{
+    padding: 30px;
+}
+
+
+.wrapper{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+   background-position: center; */
+  height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+header{
+    /* width: 100%; */
+    /* padding: 20px 100px; */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     margin-bottom: 50px; 
+     margin-top: 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: inherit;
+}
+.logo{
+    
+    font-size: 2em;
+    color:blue;
+    font-weight:bold;
+    margin-right: 50px;
+        padding: 5px 15px 5px 15px;
+}
+.post{
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: .8px;
+    margin-bottom: 30px;
+
+}
+.post img{
+    width: 60%;
+
+}
+.post p.info{
+    margin: 6px 0;
+    color: plum;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    gap: 5px;
+
+
+}
+
+.post p.info a.author{
+    color: aqua;
+
+}
+.post p.summary{
+    margin: 10px 0;
+    line-height: 1.4rem;
+}
+
+.post .texts h2{
+    margin: 0;
+    font-size: 1.8rem;
+
+
+}
+/* .btn {
+
+    width: 100%;
+    background-color: blue;
+    border-width: 0px;
+    border-radius: 5px;
+    color:white;
+    padding: 5px;
+    margin-bottom: 10px;
+
+} */
+
+.navigation a {
+    position: relative;
+    /* font-size: 10px; */
+    color: blueviolet;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+
+}
+
+.navigation a:hover{
+    font-size: larger;
+    text-decoration: underline;
+}
+
+
+.navigation .btnlogin-popup {
+    /* width: 200px; */
+    /* height: 100px; */
+    background: transparent;
+    border: solid 2px black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 50px; 
+    padding: 5px 15px 5px 15px;
+
+}
+
+.navigation .btnlogin-popup:hover{
+    background: aqua;
+}
+
+.navigation .btnRegistration-popup{
+    background: transparent;
+    border: solid 2px black ;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 50px;
+    padding: 5px 15px 5px 15px;
+
+}
+.btnRegistration-popup:hover{
+    background-color: aqua;
+}
+
+.form-box h2{
+    font-size: 2em;
+    color: blue;
+    text-align: center;
+
+}
+
+.input-box{
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid green;
+    margin: 30px  0;
+    position: relative;
+
+}
+
+
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+.input-box .icon{
+    position: absolute;
+    /* right: 0px; */
+    top:-12px;
+    right: -5px;
+    font-size: 1.2em;
+    color: blueviolet;
+    line-height: 57px;
+
+
+}
