@@ -1,27 +1,96 @@
 const express = require("express");
 const router = express.Router();
+
+//here are importing the blogModel from the BlogSchema
+//module, which is presumably a module that defines the schema and model for  blog posts in a web application
 const blogModel = require("../../Models/BlogSchema");
 const checkLogin = require("../../middlewares");
+const { getAllBlogs, getBlogById } = require("../../container/BlogContainer");
+
 //Routes
 
-router.get("/", (req, res) => {
-  const locals = {
-    Name: "Atomic Hablits",
-    createdAt: "10/11/2023",
-    description: "this is one of the books on how to create habits",
-  };
-
-  res.render("register", { locals });
+// Route to retrieve blog data on the home page
+router.get("/", async (req, res) => {
+ 
+  const {data ,page, totalPages, hasNextPage} = await getAllBlogs(req,res)
+  try {
+    res.render("layouts/home", {
+      
+      data,
+      currentPage: page,
+      totalPages,
+      hasNextPage,
+    });
+    
+  } catch (error) {
+    console.error(error);
+    //res.render("error", { error });
+  }
 });
 
-router.post("/", checkLogin, (req, res) => {
-  const { title, content, author } = req.body;
-  var newblog = new blogModel({ title: title, content: content });
-  newblog.author.name = author;
+// Route to create a new blog post
+router.post("/", checkLogin, async(req, res) => {
+ 
+  const { title, content, author,imageUrl } = req.body;
 
-  newblog.save();
+  if (!title || !content) {
+    return res.status(400).send("Title and content are required");
+  }
 
-  res.redirect("/");
+  const newBlog = new blogModel({
+    title,
+    content,
+    imageSource:"/image1.jpg",
+    author: {
+      name: author,
+      createdAt: String,
+    },
+  });
+ 
+  
+ 
+  newBlog.save();
+
+  const {data ,page, totalPages, hasNextPage} = await getAllBlogs(req,res)
+  
+    res.render("layouts/home", {
+      
+      data,
+      currentPage: page,
+      totalPages,
+      hasNextPage,
+      isLoggedIn:true
+    });
+
 });
 
+router.get("/", async (req, res) => {
+  try {
+    // Replace this with your actual logic to fetch blog posts from your database
+    const blogPosts = await fetchBlogPosts(); // Implement your own function to fetch posts
+
+    // Construct the `locals` object with the `list` property
+    const locals = {
+      list: blogPosts, // Make sure this property name matches the one used in your template
+    };
+
+    // Render the "home" template with the data
+    res.render("home", locals);
+  } catch (error) {
+    console.error(error);
+  }
+});
+router.get("/:id" ,checkLogin,async (req,res)=> {
+  
+  const blogId= req.params.id
+ 
+  const blog = await getBlogById(blogId)
+  
+  if(!blog) {
+   return res.status(400).send("Blog is not found ")
+  }
+  res.render("layouts/post", {blog})
+})
 module.exports = router;
+
+
